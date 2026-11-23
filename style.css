@@ -1,42 +1,60 @@
+
+* {
+    box-sizing: border-box;
+}
+
 .vt323-regular {
-  font-family: "VT323", monospace;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
     background: black;
     font-family: monospace;
+    margin: 0;
+    padding: 15px;
 }
 
+/* Main layout */
+.back-tab {
+    color: white;
+    display: flex;
+    background-color: #222831;
+    border-radius: 20px;
+    min-height: 97vh;
+    height: auto;
+    overflow: hidden;
+}
+
+/* Left panel */
 .left-side {
     width: 50%;
-    background: linear-gradient(135deg, #8aecefce, #535ae6ce) ;
+    min-width: 0;
+    background: linear-gradient(135deg, #8aecefce, #535ae6ce);
     border-radius: 20px;
     padding: 40px;
     position: relative;
     box-shadow: 1px 1px 30px rgb(0, 0, 0);
+    min-height: 97vh;
+    overflow: hidden;
 }
 
 .left-side::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
-    height: 97vh;
+    height: 100%;
     background: url("images/beach.jpeg");
     background-size: cover;
     background-position: center;
-    opacity: 0.2; /* ← 20% visible */
+    opacity: 0.2;
     border-radius: 20px;
+    pointer-events: none;
 }
 
-#day {
-    margin: 10px 0;
-}
-
-#date {
+#day, #date {
     margin: 10px 0;
 }
 
@@ -45,7 +63,7 @@ body {
     align-items: center;
     gap: 5px;
     position: absolute;
-    margin:0;
+    margin: 0;
     left: 35px;
 }
 
@@ -63,34 +81,28 @@ body {
     margin-top: 0;
 }
 
+/* Right panel */
 .right-side {
     width: 50%;
+    min-width: 0;
     padding: 40px;
     display: flex;
     flex-direction: column;
     position: relative;
 }
 
-.back-tab {
-    color: white;
-    display: flex;
-    background-color: #222831;
-    border-radius: 20px;
-    height: 97vh;
-}
-
 .info {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 .info-el {
     margin: 10px;
 }
-
 
 .container-one {
     padding: 10px;
@@ -98,16 +110,13 @@ body {
     margin-bottom: 20px;
 }
 
-.container-two {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
+.container-two,
 .container-three {
-    display: flex;
     width: 100%;
+    display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #weekday {
@@ -117,8 +126,10 @@ body {
 
 .tab {
     background: #272E37;
-    width: 103px;
-    height: 165px;
+    flex: 1 1 90px;
+    max-width: 103px;
+    min-width: 0;
+    min-height: 165px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -134,21 +145,21 @@ body {
     border: 1px solid #74b0b6;
     outline: none;
     font-size: 1rem;
-    color: #1a1a1a; /* Dark black text */
+    color: white;
     width: 100%;
     font-weight: 500;
     margin-top: 30px;
-    padding: 15px 0px;
+    padding: 15px 10px;
     text-align: center;
     border-radius: 5px;
     background: #222831;
-    color: white;
 }
 
 button {
-    width: 30vw;
-    padding: 0px 20px;
-    margin-top: 40px;
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 20px;
+    margin: 40px auto 0;
     background: linear-gradient(to right, #90D9E0, #5460E6);
     border-radius: 10px;
     color: white;
@@ -158,5 +169,87 @@ button {
     align-items: center;
     font-size: 18px;
     gap: 10px;
+    cursor: pointer;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .left-side,
+    .right-side {
+        padding: 25px;
+    }
+
+    .tab {
+        flex-basis: 75px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+
+    .back-tab {
+        flex-direction: column;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    .left-side {
+        height: 55vh;
+        min-height: 350px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .left-side::before {
+        border-radius: 0 0 20px 20px;
+    }
+
+    .right-side {
+        padding: 25px 15px;
+    }
+
+    #location {
+        left: 20px;
+    }
+
+    #temp {
+        font-size: 35px;
+    }
+
+    .down {
+        bottom: 20px;
+    }
+
+    .info {
+        justify-content: space-around;
+    }
+
+    .info-el {
+        margin: 8px;
+    }
+
+    .container-one {
+        padding: 5px;
+    }
+
+    .tab {
+        flex: 1 1 70px;
+        max-width: 103px;
+        min-height: 145px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 25px;
+    }
 }
 
